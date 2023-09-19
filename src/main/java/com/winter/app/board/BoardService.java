@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.winter.app.commons.Pager;
 
-public interface BoardDAO {
+public interface BoardService {
 	
-	public Long getCount(Pager pager)throws Exception;
+	
 	
 	public List<BoardVO> getList(Pager pager)throws Exception;
 	
@@ -16,9 +16,6 @@ public interface BoardDAO {
 	
 	public int setUpdate (BoardVO boardVO)throws Exception;
 	
-	public int setHitUpdate (BoardVO boardVO)throws Exception;
-	
 	public int setDelete(BoardVO boardVO)throws Exception;
-	
 
 }
