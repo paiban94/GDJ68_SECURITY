@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.winter.app.board.BoardVO;
@@ -29,6 +30,19 @@ public class NoticeController {
 		//ERROR , WARN, INFO, DEBUG, TRACE
 		log.error("getList 실행");
 		return "board/list";
+	}
+	
+	@GetMapping("add")
+	public String add()throws Exception{
+		return "board/add";
+	}
+	
+	@PostMapping("add")
+	public String add(NoticeVO noticeVO)throws Exception{
+		
+		 int result = noticeService.add(noticeVO);
+		
+		return "redirect:./list";
 	}
 
 }
