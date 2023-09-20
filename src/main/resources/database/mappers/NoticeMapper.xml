@@ -35,10 +35,17 @@
 		limit #{startRow}, #{lastRow}
   	</select>
   	
-  	<insert id="add" parameterType="BoardVO">
-  		INSERT INTO NOTICE 
-  		VALUES (NULL, #{boardTitle}, #{boardWriter}, #{boardContents}, now(), 0)
+ 	<insert id="add" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="boardNo">
+ 		
+  		INSERT INTO NOTICE  
+  		VALUES (null, #{boardTitle}, #{boardWriter}, #{boardContents}, now(), 0)
   	</insert>
+  	
+  	<insert id="fileAdd" parameterType="NoticeFileVO">
+  		INSERT INTO NOTICEFILES
+  		VALUES (#{fileNO}, #{boardNo}, #{fileName}, #{oriName})
+  	</insert>
+
   	
   	<!-- Detail -->
   	<select id="getDetail" parameterType="BoardVO" resultType="NoticeVO">
