@@ -49,6 +49,11 @@ public class NoticeService implements BoardService {
 		
 		
 		for(MultipartFile multipartFile:files) {
+			
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
 			NoticeFileVO fileVO = new NoticeFileVO();
 			String fileName=fileManger.save(this.uploadPath+this.boardName, multipartFile);
 			fileVO.setBoardNo(boardVO.getBoardNo());

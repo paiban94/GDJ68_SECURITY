@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class FileVO {
 	
-	private Long fileNum;
+	private Long fileNo;
 	private String fileName;
 	private String oriName;
 

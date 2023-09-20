@@ -43,14 +43,35 @@
   	
   	<insert id="fileAdd" parameterType="NoticeFileVO">
   		INSERT INTO NOTICEFILES
-  		VALUES (#{fileNO}, #{boardNo}, #{fileName}, #{oriName})
+  		VALUES (#{fileNo}, #{boardNo}, #{fileName}, #{oriName})
   	</insert>
 
   	
   	<!-- Detail -->
-  	<select id="getDetail" parameterType="BoardVO" resultType="NoticeVO">
-  		SELECT * FROM NOTICE WHERE BOARDNO=#{boardNo}
+  	<select id="getDetail" parameterType="BoardVO" resultMap="getDetailResult">
+  		SELECT N.*, NF.* 
+  		FROM
+  				NOTICE N
+  				LEFT OUTER JOIN
+  				NOTICEFILES NF
+  				ON N.BOARDNO=NF.BOARDNO   				
+  		WHERE N.BOARDNO=#{boardNo}
   	</select>
+  	
+  	<resultMap type="NoticeVO" id="getDetailResult">
+  		<id column="BOARDNO" property="boardNo"/>
+  		<result column="BOARDTITLE" property="boardTitle"/>
+  		<result column="BOARDWRITER" property="boardWriter"/>
+  		<result column="BOARDCONTENTS" property="boardContents"/>
+  		<result column="BOARDDATE" property="boardDate"/>
+  		<result column="BOARDHIT" property="boardHit"/>
+  		<collection property="list" javaType="java.util.List" ofType="NoticeFileVO">
+  			<id column="FILENO" property="fileNo"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
   	
   	<!-- Update -->
   	<update id="setUpdate" parameterType="BoardVO">
