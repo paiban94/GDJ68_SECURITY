@@ -92,4 +92,8 @@
   		DELETE FROM NOTICE WHERE BOARDNO=#{boardNo}
   	</delete>
   	
+  	<select id="getFileDetail" parameterType="FileVO" resultType="NoticeFileVO">
+  		SELECT * FROM NOTICEFILES WHERE FILENO=#{fileNo}
+  	</select>
+  	
   </mapper>

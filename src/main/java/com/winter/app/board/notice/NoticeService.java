@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.board.BoardService;
 import com.winter.app.board.BoardVO;
+import com.winter.app.board.FileVO;
 import com.winter.app.commons.FileManger;
 import com.winter.app.commons.Pager;
 
@@ -81,6 +82,12 @@ public class NoticeService implements BoardService {
 	public int setDelete(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
 		return noticeDAO.setDelete(boardVO);
+	}
+	
+	@Override
+	public FileVO getFileDetail(FileVO fileVO) throws Exception {
+		// TODO Auto-generated method stub
+		return noticeDAO.getFileDetail(fileVO);
 	}
 
 }
