@@ -1,7 +1,11 @@
 package com.winter.app.member;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	
 	//service
+	@Autowired
+	private MemberService memberService;
 	
 //	@GetMapping("join")
 //	public void setJoin(Model model)throws Exception{
@@ -28,8 +34,17 @@ public class MemberController {
 	}
 	
 	@PostMapping("join")
-	public void setJoin(MemberVO memberVO, MultipartFile photo)throws Exception{
+	public String setJoin(@Valid MemberVO memberVO,BindingResult bindingResult, MultipartFile photo)throws Exception{
+		
+		 boolean check = memberService.getMemberError(memberVO, bindingResult);
+		
+		
+		if(bindingResult.hasErrors() || check) {
+			return "member/join"; 
+		}
+		
 		log.info("Photo : {} --- size : {}", photo.getOriginalFilename(), photo.getSize());
+		return "redirect:../";
 	}
 	
 

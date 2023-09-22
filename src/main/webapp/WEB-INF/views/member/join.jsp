@@ -26,29 +26,35 @@
     	 			  <div class="form-group">
     	 			  	<form:label path="username">Username</form:label>
 					    <form:input id="username"  path="username" cssClass="form-control"/>
+					    <form:errors path="username"></form:errors>
 					  </div>
 					  
 					  <div class="form-group">
 					    <form:label path="password">Password</form:label>
 					    <form:password path="password" cssClass="form-control" id="password"/>
+					    <form:errors path="password"></form:errors>
 					  </div>
 					  <div class="form-group">
 					    <form:label path="passwordCheck">PasswordCheck</form:label>
 					    <form:password path="passwordCheck" cssClass="form-control" id="passwordCheck"/>
+					    <form:errors path="passwordCheck"></form:errors>
 					  </div>
 					  
     	 			  <div class="form-group">
     	 			  	<form:label path="name">Username</form:label>
 					    <form:input id="name"  path="name" cssClass="form-control"/>
+					    <form:errors path="name"></form:errors>
 					  </div>	
     	 			  <div class="form-group">
     	 			  	<form:label path="email">Email</form:label>
 					    <form:input id="email"  path="email" cssClass="form-control"/>
+					    <form:errors path="email"></form:errors>
 					  </div>
 					  
     	 			  <div class="form-group">
     	 			  	<form:label path="birth">Birth</form:label>
 					    <form:input id="birth"  path="birth" cssClass="form-control"/>
+					    <form:errors path="birth"></form:errors>
 					  </div>	
 					  
 					  <div class="form-group">
