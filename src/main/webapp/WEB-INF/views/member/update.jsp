@@ -22,23 +22,8 @@
     	 		<c:import url="/WEB-INF/views/layout/topbar.jsp"></c:import>
     	 		
     	 		<div class="container-fluid">
-    	 			<form:form modelAttribute="memberVO" method="post" enctype="multipart/form-data">
-    	 			  <div class="form-group">
-    	 			  	<form:label path="username">Username</form:label>
-					    <form:input id="username" disabled="true"  path="username" cssClass="form-control"/>
-					    <form:errors path="username"></form:errors>
-					  </div>
-					  
-					  <div class="form-group">
-					    <form:label path="password">Password</form:label>
-					    <form:password path="password" cssClass="form-control" id="password"/>
-					    <form:errors path="password"></form:errors>
-					  </div>
-					  <div class="form-group">
-					    <form:label path="passwordCheck">PasswordCheck</form:label>
-					    <form:password path="passwordCheck" cssClass="form-control" id="passwordCheck"/>
-					    <form:errors path="passwordCheck"></form:errors>
-					  </div>
+    	 			<form:form modelAttribute="memberInfoVO" method="post" enctype="multipart/form-data">
+    	 			  
 					  
     	 			  <div class="form-group">
     	 			  	<form:label path="name">Username</form:label>
