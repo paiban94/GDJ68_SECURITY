@@ -24,17 +24,18 @@
                     </form>
 					
                     <!-- Topbar Navbar -->
+                    <!-- 로그인 전 -->
                     <c:if test="${empty member}">
                     	<ul class="navbar-nav ml-auto">
                     		<li class="nav-item ">
 	                            <a class="nav-link" href="/member/join" id="join" role="button">
-	                                <i class="fas fa-search fa-fw"></i>
+	                                <i class='far fa-address-book' style='font-size:24px;color:red'></i>
 	                            </a>                    			
                     		</li>
                     		<li class="nav-item ">
 	                            <a class="nav-link" href="/member/login" id="join" role="button">
 	                                <!-- <i class="fas fa-search fa-fw"></i> -->
-	                                <i class='far fa-address-book' style='font-size:24px'></i>
+	                                <i class='fas fa-user-lock' style='font-size:24px;color:red'></i>
 	                            </a>                    			
                     		</li>
                     	</ul>
