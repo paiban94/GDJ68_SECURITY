@@ -32,7 +32,7 @@ public class MemberController {
 	@GetMapping("update")
 	public void setUpdate(HttpSession session, Model model)throws Exception{
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		memberVO = memberService.getLogin(memberVO);
+		//memberVO = memberService.getLogin(memberVO);
 		
 		MemberInfoVO memberInfoVO = new MemberInfoVO();
 		memberInfoVO.setName(memberVO.getName());
@@ -62,19 +62,7 @@ public class MemberController {
 		
 	}
 	
-	@PostMapping("login")
-	public String getLogin2(MemberVO memberVO, HttpSession session)throws Exception{
-		memberVO= memberService.getLogin(memberVO);
-		
-		if(memberVO != null) {
-			session.setAttribute("member", memberVO);
-			return "redirect:../";
-		}
-		
-		return "redirect:./login";
-		
-	}
-	
+
 //	@GetMapping("join")
 //	public void setJoin(Model model)throws Exception{
 //		MemberVO memberVO = new MemberVO();
