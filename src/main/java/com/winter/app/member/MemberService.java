@@ -1,10 +1,15 @@
 package com.winter.app.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +21,8 @@ public class MemberService implements UserDetailsService {
 	//DAO
 	@Autowired
 	private MemberDAO memberDAO;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -55,6 +62,17 @@ public class MemberService implements UserDetailsService {
 		
 		
 		return check;
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public int setJoin (MemberVO memberVO)throws Exception{
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		int result=memberDAO.setJoin(memberVO);
+		Map<String, Object> map=new HashMap<>();
+		map.put("roleNum", 3);
+		map.put("username", memberVO.getUsername());
+		result = memberDAO.setMemberRole(map);		
+		return result;
 	}
 
 }

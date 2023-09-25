@@ -27,7 +27,7 @@ public class MemberVO extends MemberInfoVO implements UserDetails {
 	@NotBlank
 	@Size(min = 2, max = 12)
 	private String username;
-	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*\\\\W)(?=\\\\S+$).{6,12}", message = "비번잘입력해")
+	//@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*\\\\W)(?=\\\\S+$).{6,12}", message = "비번잘입력해")
 	private String password;
 	private String passwordCheck;
 	

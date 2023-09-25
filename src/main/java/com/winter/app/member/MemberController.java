@@ -83,7 +83,7 @@ public class MemberController {
 			return "member/join"; 
 		}
 		
-		//회원가입 진행
+		int result = memberService.setJoin(memberVO);
 		
 		
 		log.info("Photo : {} --- size : {}", photo.getOriginalFilename(), photo.getSize());
