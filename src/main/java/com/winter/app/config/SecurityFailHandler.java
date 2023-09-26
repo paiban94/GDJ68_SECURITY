@@ -32,11 +32,13 @@ public class SecurityFailHandler implements AuthenticationFailureHandler {
 		
 		String message="로그인 실패";
 		if(exception instanceof InternalAuthenticationServiceException) {
-			message="없는 회원 정보";
+			//message="없는 회원 정보";
+			message="login.fail.nouser";
 		}
 		
 		if(exception instanceof BadCredentialsException) {
-			message="비번이 틀렸다";
+			//message="비번이 틀렸다";
+			message="login.fail.notpassword";
 		}
 		
 		if(exception instanceof AccountExpiredException) {
