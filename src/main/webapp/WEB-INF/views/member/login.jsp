@@ -22,6 +22,10 @@
     	 		<c:import url="/WEB-INF/views/layout/topbar.jsp"></c:import>
     	 		
     	 		<div class="container-fluid">
+    	 			<div>
+    	 				<h3>${param.message}</h3>
+    	 			</div>
+    	 		
     	 			<form:form modelAttribute="memberVO" method="post">
     	 			  <div class="form-group">
     	 			  	<form:label path="username">Username</form:label>
@@ -53,5 +57,13 @@
     
 
 <c:import url="/WEB-INF/views/layout/footjs.jsp"></c:import>
+<script type="text/javascript">
+	let m = '${param.message}';
+	
+	if(m != ''){
+		alert('${param.message}');
+	}
+
+</script>
 </body>
 </html>

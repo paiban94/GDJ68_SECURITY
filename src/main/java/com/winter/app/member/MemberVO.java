@@ -31,6 +31,8 @@ public class MemberVO extends MemberInfoVO implements UserDetails {
 	private String password;
 	private String passwordCheck;
 	
+	private Boolean enabled;
+	
 	private List<RoleVO> roleVOs;
 	
 	
@@ -62,7 +64,7 @@ public class MemberVO extends MemberInfoVO implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return this.enabled;
 	}
 	
 	
