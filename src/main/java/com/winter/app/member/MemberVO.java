@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +24,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MemberVO extends MemberInfoVO implements UserDetails {
+public class MemberVO extends MemberInfoVO implements UserDetails, OAuth2User {
 	
 	@NotBlank
 	@Size(min = 2, max = 12)
@@ -34,6 +36,16 @@ public class MemberVO extends MemberInfoVO implements UserDetails {
 	private Boolean enabled;
 	
 	private List<RoleVO> roleVOs;
+	
+	//OAuth2User , token 정보 저장
+	private Map<String,Object> attributes;
+	
+	//OAuth2user
+	@Override
+	public Map<String, Object> getAttributes() {
+		// TODO Auto-generated method stub
+		return this.attributes;
+	}
 	
 	
 	@Override
@@ -66,7 +78,6 @@ public class MemberVO extends MemberInfoVO implements UserDetails {
 		// TODO Auto-generated method stub
 		return this.enabled;
 	}
-	
 	
 	
 
