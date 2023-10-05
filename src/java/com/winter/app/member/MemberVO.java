@@ -47,6 +47,7 @@ public class MemberVO extends MemberInfoVO implements UserDetails, OAuth2User {
 		return this.attributes;
 	}
 	
+	private String accessToken;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -34,10 +34,17 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@GetMapping("kakaoLogout")
+	public void kakaoLogout() {
+		log.info("카카오 로그아웃 Controller");
+		return ;
+	}
+	
 	@GetMapping("info")
 	public void getInfo()throws Exception{
 		//DB에서 사용자 정보를 조회 해서 JSP로 보냄
 	}
+
 	
 	@GetMapping("update")
 	public void setUpdate(@AuthenticationPrincipal MemberVO memberVO, Model model)throws Exception{
@@ -63,12 +70,12 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("logout")
-	public String getLogout(HttpSession session) throws Exception {
-		session.invalidate();
-		
-		return "redirect:../";
-	}
+	//	@GetMapping("logout")
+	//	public String getLogout(HttpSession session) throws Exception {
+	//		session.invalidate();
+	//		
+	//		return "redirect:../";
+	//	}
 	
 	@GetMapping("login")
 	public String getLogin(@ModelAttribute MemberVO memberVO)throws Exception{

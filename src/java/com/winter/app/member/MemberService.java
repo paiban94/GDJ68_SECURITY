@@ -37,6 +37,10 @@ public class MemberService extends DefaultOAuth2UserService implements UserDetai
 	//social login 사용
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+		log.info("***********************************");
+		log.info("{}", userRequest.getAccessToken());
+		log.info("***********************************");
+		
 		log.info("=====social Login 처리 진행=====");
 		ClientRegistration clientRegistration = userRequest.getClientRegistration();
 		log.info("============{}==============",clientRegistration);
@@ -48,21 +52,23 @@ public class MemberService extends DefaultOAuth2UserService implements UserDetai
 		//social에 kakao 들어감
 		String social = clientRegistration.getRegistrationId();
 		if(social.equals("kakao")) {
-			auth2User = this.forKakao(auth2User);
+			auth2User = this.forKakao(auth2User, userRequest);
 		}
 		
 		return auth2User;
 	}
 	
-	private OAuth2User forKakao(OAuth2User auth2User) {
+	private OAuth2User forKakao(OAuth2User auth2User, OAuth2UserRequest userRequest) {
 		MemberVO memberVO = new MemberVO();
 		LinkedHashMap<String,String> map = auth2User.getAttribute("properties");
 		//Object obj =auth2User.getAttribute("properties").getClass();
 		//memberVO.setUsername();
 		log.info("111******{}*****",auth2User.getAttribute("properties").toString());
 	
-		LinkedHashMap<String, Object> kakaoAccount = auth2User.getAttribute("kakao_account");
-		LinkedHashMap<String, Object> profile = (LinkedHashMap<String, Object>)kakaoAccount.get("profile");
+		LinkedHashMap<String, Object> kakaoAccount= auth2User.getAttribute("kakao_account");
+		
+		
+		LinkedHashMap<String, Object> profile =(LinkedHashMap<String, Object>)kakaoAccount.get("profile");
 		
 		log.info("NickName : {} ====", profile.get("nickname"));
 		log.info("ProfileImage : {} ====", profile.get("profile_image_url"));
@@ -85,13 +91,18 @@ public class MemberService extends DefaultOAuth2UserService implements UserDetai
 		sb.append("-");
 		sb.append(d);
 		//sb.append(y).append("-") ~~~~~
+		//사용자가 DB에 있는지 확인
+		memberVO.setAccessToken(userRequest.getAccessToken().getTokenValue());
 		memberVO.setUsername(map.get("nickname"));
-		memberVO.setName(map.get("nickname"));
+		//memberVO.setName(map.get("nickname"));
+		//회원ID를 Name에 대입
+		memberVO.setName(auth2User.getName());
 		memberVO.setEmail(kakaoAccount.get("email").toString());
 		memberVO.setBirth(Date.valueOf(sb.toString()));
 		
 		memberVO.setAttributes(auth2User.getAttributes());
 		
+		//사용자 권한을 DB에서 조회
 		List<RoleVO> list = new ArrayList<>();
 		RoleVO roleVO = new RoleVO();
 		roleVO.setRoleName("ROLE_MEMBER");
